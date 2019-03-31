@@ -2,9 +2,9 @@
 
 namespace Project.DataProvider.Entities
 {
-    public class BaseEntity
+    public class BaseEntity<TKey>
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual long Id { get; set; }
+        public virtual TKey Id { get; set; }
     }
 }

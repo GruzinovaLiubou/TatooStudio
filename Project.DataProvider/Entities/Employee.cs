@@ -2,11 +2,10 @@
 
 namespace Project.DataProvider.Entities
 {
-    public class Employee: BaseEntity
+    public class Employee: BaseEntity<long>
     {
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
-
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Service> Services { get; set; }
     }

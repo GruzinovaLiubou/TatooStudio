@@ -13,7 +13,7 @@ namespace ITAcademy.Gallery.Dependency
         public MyDependencyResolver()
         {
             _container = new UnityContainer();
-            _container.RegisterType<IPhotoService, PhotoService>();
+            // _container.RegisterType<IPhotoService, PhotoService>();
             //_container.RegisterType<IContext, Context>();
         }
 

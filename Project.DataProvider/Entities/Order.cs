@@ -2,7 +2,7 @@
 
 namespace Project.DataProvider.Entities
 {
-    public class Order : BaseEntity
+    public class Order : BaseEntity<long>
     {
         public DateTime Time { get; set; }
         public virtual Employee Employee { get; set; }
