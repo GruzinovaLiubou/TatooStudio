@@ -52,9 +52,9 @@
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\Service.cs" />
-    <Compile Include="Migrations\201903311301049_Initial.cs" />
-    <Compile Include="Migrations\201903311301049_Initial.Designer.cs">
-      <DependentUpon>201903311301049_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201903311418391_Initial.cs" />
+    <Compile Include="Migrations\201903311418391_Initial.Designer.cs">
+      <DependentUpon>201903311418391_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,8 +68,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903311301049_Initial.resx">
-      <DependentUpon>201903311301049_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903311418391_Initial.resx">
+      <DependentUpon>201903311418391_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

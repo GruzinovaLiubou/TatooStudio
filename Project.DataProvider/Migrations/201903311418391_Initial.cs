@@ -12,7 +12,7 @@ namespace Project.DataProvider.Migrations
                     {
                         Id = c.Long(nullable: false, identity: true),
                         Name = c.String(),
-                        PhoneNumber = c.Double(nullable: false),
+                        PhoneNumber = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -21,15 +21,15 @@ namespace Project.DataProvider.Migrations
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
-                        MyProperty = c.DateTime(nullable: false),
+                        Time = c.DateTime(nullable: false),
                         Employee_Id = c.Long(),
-                        Services_Id = c.Long(nullable: false),
+                        Service_Id = c.Long(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Employees", t => t.Employee_Id)
-                .ForeignKey("dbo.Servicies", t => t.Services_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Servicies", t => t.Service_Id, cascadeDelete: true)
                 .Index(t => t.Employee_Id)
-                .Index(t => t.Services_Id);
+                .Index(t => t.Service_Id);
             
             CreateTable(
                 "dbo.Servicies",
@@ -47,7 +47,7 @@ namespace Project.DataProvider.Migrations
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
-                        RoleName = c.String(),
+                        Name = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -68,13 +68,13 @@ namespace Project.DataProvider.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.Orders", "Services_Id", "dbo.Servicies");
+            DropForeignKey("dbo.Orders", "Service_Id", "dbo.Servicies");
             DropForeignKey("dbo.ServiceEmployees", "Employee_Id", "dbo.Employees");
             DropForeignKey("dbo.ServiceEmployees", "Service_Id", "dbo.Servicies");
             DropForeignKey("dbo.Orders", "Employee_Id", "dbo.Employees");
             DropIndex("dbo.ServiceEmployees", new[] { "Employee_Id" });
             DropIndex("dbo.ServiceEmployees", new[] { "Service_Id" });
-            DropIndex("dbo.Orders", new[] { "Services_Id" });
+            DropIndex("dbo.Orders", new[] { "Service_Id" });
             DropIndex("dbo.Orders", new[] { "Employee_Id" });
             DropTable("dbo.ServiceEmployees");
             DropTable("dbo.Roles");

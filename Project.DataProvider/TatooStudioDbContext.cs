@@ -28,7 +28,7 @@ namespace Project.DataProvider
 
             serviceConfig
                 .HasMany(x => x.Orders)
-                .WithRequired(x => x.Services);
+                .WithRequired(x => x.Service);
 
             serviceConfig
                 .HasMany(x => x.Employees)
@@ -42,7 +42,7 @@ namespace Project.DataProvider
                 .HasKey(x =>x.Id);
 
             orderConfig
-                .HasRequired(x => x.Services)
+                .HasRequired(x => x.Service)
                 .WithMany(x => x.Orders);
 
             orderConfig

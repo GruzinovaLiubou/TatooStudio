@@ -7,6 +7,6 @@ namespace Project.DataProvider.Entities
         public DateTime Time { get; set; }
         public virtual Employee Employee { get; set; }
         // TODO: Add User field and add config to it
-        public virtual Service Services { get; set; }
+        public virtual Service Service { get; set; }
     }
 }
