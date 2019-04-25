@@ -1,7 +1,8 @@
-using System.Data.Entity.Migrations;
-
 namespace Project.DataProvider.Migrations
 {
+    using System;
+    using System.Data.Entity.Migrations;
+    
     public partial class Initial : DbMigration
     {
         public override void Up()
@@ -23,12 +24,15 @@ namespace Project.DataProvider.Migrations
                         Id = c.Long(nullable: false, identity: true),
                         Time = c.DateTime(nullable: false),
                         Service_Id = c.Long(nullable: false),
+                        User_Id = c.String(nullable: false, maxLength: 128),
                         Employee_Id = c.Long(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Servicies", t => t.Service_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.User_Id, cascadeDelete: true)
                 .ForeignKey("dbo.Employees", t => t.Employee_Id, cascadeDelete: true)
                 .Index(t => t.Service_Id)
+                .Index(t => t.User_Id)
                 .Index(t => t.Employee_Id);
             
             CreateTable(
@@ -43,43 +47,28 @@ namespace Project.DataProvider.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Roles",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.UserRoles",
-                c => new
-                    {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
-                        IdentityRole_Id = c.String(maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.Roles", t => t.IdentityRole_Id)
-                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId)
-                .Index(t => t.IdentityRole_Id);
-            
-            CreateTable(
                 "dbo.Users",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(),
+                        Surname = c.String(),
+                        PhoneNumber = c.String(),
                         Email = c.String(),
+                        UserName = c.String(),
+                        EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
                         SecurityStamp = c.String(),
-                        PhoneNumber = c.String(),
-                        UserName = c.String(),
+                        PhoneNumberConfirmed = c.Boolean(nullable: false),
+                        TwoFactorEnabled = c.Boolean(nullable: false),
+                        LockoutEndDateUtc = c.DateTime(),
+                        LockoutEnabled = c.Boolean(nullable: false),
+                        AccessFailedCount = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.IdentityUserClaims",
+                "dbo.UserClaims",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -105,6 +94,29 @@ namespace Project.DataProvider.Migrations
                 .Index(t => t.User_Id);
             
             CreateTable(
+                "dbo.UserRoles",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                        IdentityRole_Id = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.Roles", t => t.IdentityRole_Id)
+                .Index(t => t.UserId)
+                .Index(t => t.IdentityRole_Id);
+            
+            CreateTable(
+                "dbo.Roles",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.EmployeeServices",
                 c => new
                     {
@@ -121,28 +133,30 @@ namespace Project.DataProvider.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.UserRoles", "UserId", "dbo.Users");
-            DropForeignKey("dbo.UserLogins", "User_Id", "dbo.Users");
-            DropForeignKey("dbo.IdentityUserClaims", "UserId", "dbo.Users");
             DropForeignKey("dbo.UserRoles", "IdentityRole_Id", "dbo.Roles");
             DropForeignKey("dbo.EmployeeServices", "Service_Id", "dbo.Servicies");
             DropForeignKey("dbo.EmployeeServices", "Employee_Id", "dbo.Employees");
             DropForeignKey("dbo.Orders", "Employee_Id", "dbo.Employees");
+            DropForeignKey("dbo.Orders", "User_Id", "dbo.Users");
+            DropForeignKey("dbo.UserRoles", "UserId", "dbo.Users");
+            DropForeignKey("dbo.UserLogins", "User_Id", "dbo.Users");
+            DropForeignKey("dbo.UserClaims", "UserId", "dbo.Users");
             DropForeignKey("dbo.Orders", "Service_Id", "dbo.Servicies");
             DropIndex("dbo.EmployeeServices", new[] { "Service_Id" });
             DropIndex("dbo.EmployeeServices", new[] { "Employee_Id" });
-            DropIndex("dbo.UserLogins", new[] { "User_Id" });
-            DropIndex("dbo.IdentityUserClaims", new[] { "UserId" });
             DropIndex("dbo.UserRoles", new[] { "IdentityRole_Id" });
             DropIndex("dbo.UserRoles", new[] { "UserId" });
+            DropIndex("dbo.UserLogins", new[] { "User_Id" });
+            DropIndex("dbo.UserClaims", new[] { "UserId" });
             DropIndex("dbo.Orders", new[] { "Employee_Id" });
+            DropIndex("dbo.Orders", new[] { "User_Id" });
             DropIndex("dbo.Orders", new[] { "Service_Id" });
             DropTable("dbo.EmployeeServices");
-            DropTable("dbo.UserLogins");
-            DropTable("dbo.IdentityUserClaims");
-            DropTable("dbo.Users");
-            DropTable("dbo.UserRoles");
             DropTable("dbo.Roles");
+            DropTable("dbo.UserRoles");
+            DropTable("dbo.UserLogins");
+            DropTable("dbo.UserClaims");
+            DropTable("dbo.Users");
             DropTable("dbo.Servicies");
             DropTable("dbo.Orders");
             DropTable("dbo.Employees");

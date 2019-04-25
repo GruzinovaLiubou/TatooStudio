@@ -15,13 +15,16 @@ namespace Project.DataProvider
         {
         }
 
+        public TatooStudioDbContext(string v)
+        {
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             ConfigureServiceEntity(modelBuilder);
             ConfigureOrderEntity(modelBuilder);
             ConfigureEmployeeEntity(modelBuilder);
             ConfigureIdentityEntities(modelBuilder);
-          
         }
 
         private void ConfigureServiceEntity(DbModelBuilder modelBuilder)
@@ -52,6 +55,11 @@ namespace Project.DataProvider
             orderConfig
                 .HasRequired(x => x.Employee)
                 .WithMany(x => x.Orders);
+
+            orderConfig
+                .HasRequired(x => x.User)
+                .WithMany(x => x.Orders);
+
         }
 
         private void ConfigureEmployeeEntity(DbModelBuilder modelBuilder)
@@ -68,12 +76,15 @@ namespace Project.DataProvider
                 .HasMany(x => x.Services)
                 .WithMany(x => x.Employees);
 
-        }
+        }       
+
 
         private void ConfigureIdentityEntities(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<IdentityRole>()
                 .ToTable("Roles");
+            modelBuilder.Entity<IdentityUserClaim>()
+                .ToTable("UserClaims");
             modelBuilder.Entity<IdentityUserRole>()
                 .ToTable("UserRoles")
                 .HasKey(x => new { x.UserId, x.RoleId });
@@ -82,12 +93,11 @@ namespace Project.DataProvider
                 .HasKey(x => x.UserId);
             modelBuilder.Entity<User>()
                 .ToTable("Users")
-                .Ignore(x => x.EmailConfirmed)
-                .Ignore(x => x.PhoneNumberConfirmed)
-                .Ignore(x => x.TwoFactorEnabled)
-                .Ignore(x => x.LockoutEndDateUtc)
-                .Ignore(x => x.LockoutEnabled)
-                .Ignore(x => x.AccessFailedCount);
+                .HasKey(x=>x.Id)                                                
+                .HasMany(x => x.Orders)
+                .WithRequired(x => x.User);
+            
+               
         }
     }
 }

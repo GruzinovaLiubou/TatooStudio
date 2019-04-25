@@ -248,10 +248,6 @@
       <Project>{931d892e-27df-4018-9786-ebad81cb95f2}</Project>
       <Name>SAM.Gruzinova.Logic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Project.IoC\SAM.Gruzinova.IoC.csproj">
-      <Project>{2b37ce97-fcdb-4aa4-8ef6-27ce528107d2}</Project>
-      <Name>SAM.Gruzinova.IoC</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Project.Model\SAM.Gruzinova.Model.csproj">
       <Project>{5df46616-174e-4714-8ce1-b8927d26bdd5}</Project>
       <Name>SAM.Gruzinova.Model</Name>

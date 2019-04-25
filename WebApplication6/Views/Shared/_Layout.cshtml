@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TatooStudio</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Tatoo Studio", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">                   
+                    <li>@Html.ActionLink("About our studio", "About", "Home")</li>
+                    <li class="nav navbar-nav dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                            Services
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">@Html.ActionLink("Gift Sertificates", "GiftSertificate", "Home")</a></li>
+                            <li><a href="#">@Html.ActionLink("Tatoos", "Tatoo", "Home")</a></li>
+                            <li><a href="#">@Html.ActionLink("Peircings", "Peircing", "Home")</a></li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Our Contacts", "Contact", "Home")</li>
+                    <li class="book-btn">@Html.ActionLink("Book a time", "Booking", "Order")</li>
+                </ul>
+                
+                <ul class="nav navbar-nav logbutton">
+                    <li>@Html.ActionLink("Log In", "Registration", "Account")</li>
+                </ul>
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Date.ToString("dd.MM.yyyy")</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

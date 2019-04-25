@@ -1,7 +1,7 @@
-using System.Data.Entity.Migrations;
-
 namespace Project.DataProvider.Migrations
 {
+    using System.Data.Entity.Migrations;
+
     internal sealed class Configuration : DbMigrationsConfiguration<TatooStudioDbContext>
     {
         public Configuration()
@@ -11,7 +11,10 @@ namespace Project.DataProvider.Migrations
 
         protected override void Seed(TatooStudioDbContext context)
         {
-            // DO NOTHING
+            //  This method will be called after migrating to the latest version.
+
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  to avoid creating duplicate seed data.
         }
     }
 }

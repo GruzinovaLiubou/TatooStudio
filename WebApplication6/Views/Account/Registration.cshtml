@@ -1,0 +1,103 @@
+﻿@model Project.Model.RegistrationModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <input type="hidden" />
+
+        <div class="col-lg-6">
+            <p>
+                <label>Name</label>
+                <div>
+                    @Html.EditorFor(model => model.Name)
+                    <div class="validation-summary-errors">
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </div>
+                </div>
+
+            </p>
+
+            <p>
+                <label>Surname</label>
+                <div>
+                    @Html.EditorFor(model => model.Surname)
+                    <div class="validation-summary-errors">
+
+                        @Html.ValidationMessageFor(model => model.Surname)
+                    </div>
+                </div>
+
+            </p>
+
+            <p>
+                <label>Phone</label>
+                <div>
+                    @Html.EditorFor(model => model.PhoneNumber)
+                    <div class="validation-summary-errors">
+
+                        @Html.ValidationMessageFor(model => model.PhoneNumber)
+                    </div>
+                </div>
+
+            </p>
+
+            <p>
+                <div class="validation-summary-errors">
+                    <input class="btn btn-default" type="submit" value="Log in" />
+                </div>
+            </p>
+
+            <br />
+            <br />
+
+            <div>
+                <a href="http://localhost:12538/Account/LogInPage">Already have an account?</a>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <p>
+                <label>Email</label>
+                <div>
+                    @Html.EditorFor(model => model.Email)
+                    <div class="validation-summary-errors">
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </div>
+
+            </p>
+
+            <p>
+                <label>Password</label>
+                <div>
+                    @Html.EditorFor(model => model.Password)
+                    <div class="validation-summary-errors">
+                        @Html.ValidationMessageFor(model => model.Password)
+                    </div>
+                </div>
+
+            </p>
+
+            <p>
+                <label>Confirm Password</label>
+                <div>
+                    @Html.EditorFor(model => model.PasswordConfirm)
+                    <div class="validation-summary-errors">
+                        @Html.ValidationMessageFor(model => model.PasswordConfirm)
+                    </div>
+                </div>
+
+            </p>
+
+        </div>
+    </div>
+}
+
+
+
+
+
+
+

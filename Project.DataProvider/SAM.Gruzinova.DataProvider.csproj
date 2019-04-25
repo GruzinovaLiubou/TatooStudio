@@ -56,27 +56,34 @@
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Order.cs" />
-    <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\Service.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Migrations\201903311728089_Initial.cs" />
-    <Compile Include="Migrations\201903311728089_Initial.Designer.cs">
-      <DependentUpon>201903311728089_Initial.cs</DependentUpon>
+    <Compile Include="GenericRepositoryFactory.cs" />
+    <Compile Include="Interfaces\IUserManager.cs" />
+    <Compile Include="Migrations\201904131430145_Initial.cs" />
+    <Compile Include="Migrations\201904131430145_Initial.Designer.cs">
+      <DependentUpon>201904131430145_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\GenericReadOnlyRepository.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Repositories\IGenericRepository.cs" />
+    <Compile Include="Repositories\IReadOnlyRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="TatooStudioDbContext.cs" />
+    <Compile Include="UserManager.cs" />
+    <Compile Include="UserManagerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="ConnectionStrings.config">
+    <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903311728089_Initial.resx">
-      <DependentUpon>201903311728089_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904131430145_Initial.resx">
+      <DependentUpon>201904131430145_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

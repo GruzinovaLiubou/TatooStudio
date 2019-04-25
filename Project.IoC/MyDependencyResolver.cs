@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Unity;
 
-namespace ITAcademy.Gallery.Dependency
+namespace Project.
 {
     public class MyDependencyResolver :
         IDependencyResolver
